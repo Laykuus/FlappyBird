@@ -24,6 +24,11 @@ PIPES = [
     ]
 ]
 
+background_sprites = [
+    [BACKGROUND_SPRITE, [0, 0]],
+    [BACKGROUND_SPRITE, [DISPLAY[0], 0]]
+]
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -45,6 +50,10 @@ while running:
                         obj.Pipe([DISPLAY_SIZE[0], DISPLAY_SIZE[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
                     ]
                 ]
+                background_sprites = [
+                    [BACKGROUND_SPRITE, [0, 0]],
+                    [BACKGROUND_SPRITE, [DISPLAY[0], 0]]
+                ]
                 pygame.time.set_timer(TICK_EVENT, 15)
                 pygame.time.set_timer(NEW_PIPES_EVENT, 1500)
 
@@ -54,6 +63,7 @@ while running:
         
         if not Bird.is_dead and not paused:
             if event.type == NEW_PIPES_EVENT:
+                # Pipes
                 rdm_upper_pipe_y = random.randint(-170, -80)
                 lower_pipe_y = rdm_upper_pipe_y - 260
 
@@ -68,7 +78,16 @@ while running:
             if event.type == TICK_EVENT:
                 score += 0.2
                 Bird.apply_gravity()
-
+                
+                # Background
+                for i in range(len(background_sprites)):
+                    background_sprites[i][1][0] += X_BACKGROUND_VELOCITY
+                
+                if background_sprites[0][1][0] == -BACKGROUND_SIZE[0]:
+                    background_sprites.pop(0)
+                    background_sprites.append([BACKGROUND_SPRITE, [DISPLAY[0], 0]])
+                    
+                
                 for pipes in PIPES:
                     pipes[0].rect.topleft = [pipes[0].rect.topleft[0] + X_PIPES_VELOCITY, pipes[0].rect.topleft[1]]
                     pipes[1].rect.topleft = [pipes[1].rect.topleft[0] + X_PIPES_VELOCITY, pipes[1].rect.topleft[1]]
@@ -88,12 +107,15 @@ while running:
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 Bird.y_velocity = 10
+        elif Bird.is_dead:
+            Bird.dead_anim()
 
     #fps = FONT.render(str(int(clock.get_fps())), True, (255, 255, 255), None)
     score_txt = PIXEL_FONT.render(f"{int(score)}m", True, "white")
     score_txt_rect = score_txt.get_rect(center=(DISPLAY_SIZE[0]//2, 40))
 
-    screen.blit(BACKGROUND_SPRITE, [0, 0])
+    #screen.blit(BACKGROUND_SPRITE, [0, 0])
+    screen.blits(background_sprites)
 
     for pipes in PIPES:
         screen.blits([
