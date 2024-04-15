@@ -79,7 +79,7 @@ while running:
                 score += 0.2
                 Bird.apply_gravity()
                 
-                # Background
+                # Background moving
                 for i in range(len(background_sprites)):
                     background_sprites[i][1][0] += X_BACKGROUND_VELOCITY
                 
@@ -87,7 +87,7 @@ while running:
                     background_sprites.pop(0)
                     background_sprites.append([BACKGROUND_SPRITE, [DISPLAY[0], 0]])
                     
-                
+                # Pipes moving + colition tests
                 for pipes in PIPES:
                     pipes[0].rect.topleft = [pipes[0].rect.topleft[0] + X_PIPES_VELOCITY, pipes[0].rect.topleft[1]]
                     pipes[1].rect.topleft = [pipes[1].rect.topleft[0] + X_PIPES_VELOCITY, pipes[1].rect.topleft[1]]
@@ -101,10 +101,12 @@ while running:
                     elif bird_mask.overlap_area(lower_pipe_mask, (pipes[1].rect.topleft[0] - Bird.rect.topleft[0], pipes[1].rect.topleft[1] - Bird.rect.topleft[1])) > 0:
                         Bird.is_dead = True
 
-
                     #if Bird.rect.colliderect(pipes[0].rect) or Bird.rect.colliderect(pipes[1].rect):
                     #    Bird.is_dead = True
-
+                    
+                    if Bird.rect.topleft[1] < 0 or Bird.rect.topleft[1] > DISPLAY[1] + Bird.sprite.get_size()[1]:
+                        Bird.is_dead = True
+                    
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 Bird.y_velocity = 10
         elif Bird.is_dead:
@@ -125,7 +127,8 @@ while running:
     
     screen.blits([
         [Bird.sprite, Bird.rect.topleft],
-        [score_txt, score_txt_rect]
+        [score_txt, score_txt_rect],
+        #[fps, [5, 5]]
     ])
     pygame.display.flip()
 
