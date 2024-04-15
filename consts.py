@@ -3,11 +3,10 @@ import pygame
 pygame.display.init()
 DISPLAY = pygame.display.get_desktop_sizes()[0]
 DISPLAY = [DISPLAY[0]//3, DISPLAY[1]//1.2]
-
-DISPLAY_SIZE = (550, 850)
+#DISPLAY_SIZE = (550, 850)
 TICK_EVENT = pygame.USEREVENT + 1
 NEW_PIPES_EVENT = pygame.USEREVENT + 2
-BACKGROUND_SPRITE = pygame.transform.scale(pygame.image.load("./assets/background.png"), DISPLAY_SIZE)
+BACKGROUND_SPRITE = pygame.transform.scale(pygame.image.load("./assets/background.png"), DISPLAY)
 BACKGROUND_SIZE = BACKGROUND_SPRITE.get_size()
 LOWER_PIPE_SPRITE = pygame.transform.scale(pygame.image.load("./assets/lower_pipe.png"), [80, 450])
 UPPER_PIPE_SPRITE = pygame.transform.scale(pygame.image.load("./assets/upper_pipe.png"), [80, 450])

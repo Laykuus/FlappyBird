@@ -3,7 +3,7 @@ import pygame, random
 class Bird:
     def __init__(self):
         sprite = pygame.image.load("./assets/bird_sprite.png")
-        self.sprite = pygame.transform.scale(sprite, (75, 53))
+        self.sprite = pygame.transform.scale(sprite, (60, 42,))
         self.rect = self.sprite.get_rect()
         self.rect.topleft = [100, 100]
         self.y_velocity = 0

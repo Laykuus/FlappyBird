@@ -19,8 +19,8 @@ rdm_upper_pipe_y = random.randint(-170, -80)
 lower_pipe_y = rdm_upper_pipe_y - 260
 PIPES = [
     [
-        obj.Pipe([DISPLAY_SIZE[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-        obj.Pipe([DISPLAY_SIZE[0], DISPLAY_SIZE[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
+        obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
+        obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
     ]
 ]
 
@@ -46,8 +46,8 @@ while running:
                 lower_pipe_y = rdm_upper_pipe_y - 260
                 PIPES = [
                     [
-                        obj.Pipe([DISPLAY_SIZE[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-                        obj.Pipe([DISPLAY_SIZE[0], DISPLAY_SIZE[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
+                        obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
+                        obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
                     ]
                 ]
                 background_sprites = [
@@ -68,8 +68,8 @@ while running:
                 lower_pipe_y = rdm_upper_pipe_y - 260
 
                 PIPES.append([
-                    obj.Pipe([DISPLAY_SIZE[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-                    obj.Pipe([DISPLAY_SIZE[0], DISPLAY_SIZE[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
+                    obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
+                    obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
                 ])
 
                 while PIPES[0][0].rect.topleft[0] < 0:
@@ -114,7 +114,7 @@ while running:
 
     #fps = FONT.render(str(int(clock.get_fps())), True, (255, 255, 255), None)
     score_txt = PIXEL_FONT.render(f"{int(score)}m", True, "white")
-    score_txt_rect = score_txt.get_rect(center=(DISPLAY_SIZE[0]//2, 40))
+    score_txt_rect = score_txt.get_rect(center=(DISPLAY[0]//2, 40))
 
     #screen.blit(BACKGROUND_SPRITE, [0, 0])
     screen.blits(background_sprites)
