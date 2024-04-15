@@ -1,5 +1,9 @@
 import pygame
 
+pygame.display.init()
+DISPLAY = pygame.display.get_desktop_sizes()[0]
+DISPLAY = [DISPLAY[0]//3, DISPLAY[1]//1.2]
+
 DISPLAY_SIZE = (550, 850)
 TICK_EVENT = pygame.USEREVENT + 1
 NEW_PIPES_EVENT = pygame.USEREVENT + 2

@@ -2,7 +2,7 @@ import pygame, obj, random
 from consts import *
 
 pygame.init()
-screen = pygame.display.set_mode(DISPLAY_SIZE,  pygame.DOUBLEBUF | pygame.HWSURFACE)
+screen = pygame.display.set_mode(DISPLAY,  pygame.DOUBLEBUF | pygame.HWSURFACE)
 clock = pygame.time.Clock()
 Bird = obj.Bird()
 running = True
