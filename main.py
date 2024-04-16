@@ -16,11 +16,12 @@ PIXEL_FONT = pygame.font.Font("./assets/DePixelHalbfett.otf", 50)
 paused_txt = BIG_FONT.render("PAUSED", True, "black")
 
 rdm_upper_pipe_y = random.randint(-170, -80)
-lower_pipe_y = rdm_upper_pipe_y - 260
+lower_pipe_y = rdm_upper_pipe_y + 450 + 150
+
 PIPES = [
     [
         obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-        obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
+        obj.Pipe([DISPLAY[0], lower_pipe_y], LOWER_PIPE_SPRITE)
     ]
 ]
 
@@ -43,13 +44,15 @@ while running:
                 score = 0
 
                 rdm_upper_pipe_y = random.randint(-170, -80)
-                lower_pipe_y = rdm_upper_pipe_y - 260
+                lower_pipe_y = rdm_upper_pipe_y + 450 + 150
+                
                 PIPES = [
                     [
                         obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-                        obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
+                        obj.Pipe([DISPLAY[0], lower_pipe_y], LOWER_PIPE_SPRITE)
                     ]
                 ]
+                
                 background_sprites = [
                     [BACKGROUND_SPRITE, [0, 0]],
                     [BACKGROUND_SPRITE, [DISPLAY[0], 0]]
@@ -65,13 +68,16 @@ while running:
             if event.type == NEW_PIPES_EVENT:
                 # Pipes
                 rdm_upper_pipe_y = random.randint(-170, -80)
-                lower_pipe_y = rdm_upper_pipe_y - 260
+                lower_pipe_y = rdm_upper_pipe_y + 450 + 150
+                
+                PIPES.append(
+                    [
+                        obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
+                        obj.Pipe([DISPLAY[0], lower_pipe_y], LOWER_PIPE_SPRITE)
+                    ]
+                )
 
-                PIPES.append([
-                    obj.Pipe([DISPLAY[0], rdm_upper_pipe_y], UPPER_PIPE_SPRITE),
-                    obj.Pipe([DISPLAY[0], DISPLAY[1] + lower_pipe_y], LOWER_PIPE_SPRITE)
-                ])
-
+                print(PIPES[0][0].rect.topleft[0])
                 while PIPES[0][0].rect.topleft[0] < 0:
                     PIPES.pop(0)
 
